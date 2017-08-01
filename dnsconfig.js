@@ -5,8 +5,12 @@ var DNS_CLOUDFLARE = NewDnsProvider('cloudflare', 'CLOUDFLAREAPI');
 
 var SOLO = '85.159.213.230';
 var SOLO_6 = '2a01:7e00::f03c:91ff:febb:b640';
+var BEAVER = '176.58.111.55';
+var BEAVER_6 = '2a01:7e00::f03c:91ff:fe60:96bb';
+var MONTELIMAR = '163.172.176.153';
 var ASTROMEGA = '185.157.233.18';
 var ASTROMEGA_6 = '2a07:4580:b0d:e6::578b';
+var JONCKHEERE = '94.130.23.252';
 
 // Domains:
 
@@ -30,7 +34,7 @@ D('bustim.es', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
 D('alexisgoodwin.com', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     A('@', ASTROMEGA),
     A('mail', '79.170.40.74'),
-    CNAME('www', 'alexisgoodwin.com.', {cloudflare_proxy: 'on'}),
+    CNAME('www', 'alexisgoodwin.com.'),
     MX('@', 10, 'mail.alexisgoodwin.com.')
 );
 
@@ -39,6 +43,12 @@ D('joshuagoodw.in', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     A('astromega', ASTROMEGA),
     AAAA('@', ASTROMEGA_6),
     AAAA('astromega', ASTROMEGA_6),
+    A('beaver', BEAVER),
+    AAAA('beaver', BEAVER_6),
+    A('montelimar', MONTELIMAR),
+    A('montélimar', MONTELIMAR),
+    A('munin', MONTELIMAR),
+    A('jonckheere', JONCKHEERE),
     CNAME('*', 'joshuagoodw.in.'),
     CNAME('subtitles', 'bustimes.org.uk.'),
     MX('@', 10, 'joshuagoodw.in.'),
@@ -54,6 +64,7 @@ D('joshuagoodwin.com', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
 );
 
 D('supermarketmarket.co.uk', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
-    A('@', '163.172.176.153'),
-    CNAME('www', 'supermarketmarket.co.uk.')
+    A('@', JONCKHEERE),
+    CNAME('www', 'supermarketmarket.co.uk.'),
+    TXT('@', 'google-site-verification=Lo7vOAWM5ruYz4la5EtBOyljWncFU1_jgs4dodt3P98')
 );
