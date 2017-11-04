@@ -2,41 +2,41 @@
 
 var REG_NONE = NewRegistrar('none', 'NONE');
 var DNS_CLOUDFLARE = NewDnsProvider('cloudflare', 'CLOUDFLAREAPI');
+// var DNS_GANDI = NewDnsProvider('gandi', 'GANDI');
 
-var SOLO = '85.159.213.230';
-var SOLO_6 = '2a01:7e00::f03c:91ff:febb:b640';
 var BEAVER = '176.58.111.55';
 var BEAVER_6 = '2a01:7e00::f03c:91ff:fe60:96bb';
-var MONTELIMAR = '163.172.176.153';
 var ASTROMEGA = '185.157.233.18';
 var ASTROMEGA_6 = '2a07:4580:b0d:e6::578b';
 var JONCKHEERE = '94.130.23.252';
+var JONCKHEERE_6 = '2a01:4f8:10b:1d03::2';
 
 // Domains:
 
 D('bustimes.org.uk', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
-    A('@', SOLO),
-    A('solo', SOLO),
-    AAAA('@', SOLO_6),
-    AAAA('solo', SOLO_6),
+    A('@', JONCKHEERE),
+    AAAA('@', JONCKHEERE_6),
     CNAME('www', 'bustimes.org.uk.'),
     MX('@', 10, 'astromega.joshuagoodw.in.'),
     TXT('@', 'v=spf1 include:_spf.google.com a:bustimes.org.uk a:astromega.joshuagoodw.in -all')
 );
 
 D('bustim.es', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
-    A('@', SOLO),
+    A('@', JONCKHEERE),
+    AAAA('@', JONCKHEERE_6),
+    CNAME('www', 'bustimes.org.uk.'),
     CNAME('api', 'd2mjppkdxq1joc.cloudfront.net.'),
-    CNAME('www', 'bustim.es.'),
     MX('@', 1, 'astromega.joshuagoodw.in.')
 );
 
-D('alexisgoodwin.com', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
-    A('@', ASTROMEGA),
-    A('mail', '79.170.40.74'),
-    CNAME('www', 'alexisgoodwin.com.'),
-    MX('@', 10, 'mail.alexisgoodwin.com.')
+/*
+D('bustimes.io', REG_NONE, DnsProvider(DNS_GANDI),
+    A('@', JONCKHEERE),
+    AAAA('@', JONCKHEERE_6),
+    CNAME('www', 'bustimes.org.uk.'),
+    TXT('@', 'google-site-verification=uLP7Vt-vsgfEUmauz7KLEoTyZVwjMCytWxIRvA73oKQ')
 );
+*/
 
 D('joshuagoodw.in', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     A('@', ASTROMEGA),
@@ -45,14 +45,17 @@ D('joshuagoodw.in', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     AAAA('astromega', ASTROMEGA_6),
     A('beaver', BEAVER),
     AAAA('beaver', BEAVER_6),
-    A('montelimar', MONTELIMAR),
-    A('montélimar', MONTELIMAR),
-    A('munin', MONTELIMAR),
+    A('munin', JONCKHEERE),
+    AAAA('munin', JONCKHEERE_6),
     A('jonckheere', JONCKHEERE),
+    AAAA('jonckheere', JONCKHEERE_6),
     CNAME('*', 'joshuagoodw.in.'),
     CNAME('subtitles', 'bustimes.org.uk.'),
-    MX('@', 10, 'joshuagoodw.in.'),
-    TXT('@', 'v=spf1 include:_spf.google.com a:solo.bustimes.org.uk a:astromega.joshuagoodw.in -all')
+    CNAME('tools', 'jclgoodwin.gitlab.io.'),
+    MX('@', 10, 'in1-smtp.messagingengine.com.'),
+    MX('@', 20, 'in2-smtp.messagingengine.com.'),
+    TXT('@', 'v=spf1 include:_spf.google.com a:solo.bustimes.org.uk a:astromega.joshuagoodw.in -all'),
+    TXT('@', 'google-site-verification=swE7yOczprWYM5AVzFarzB_Xiy128k5gn3_S9C2Uxls')
 );
 
 D('joshuagoodwin.com', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
