@@ -11,14 +11,20 @@ var ASTROMEGA_6 = '2a07:4580:b0d:e6::578b';
 var JONCKHEERE = '94.130.23.252';
 var JONCKHEERE_6 = '2a01:4f8:10b:1d03::2';
 
+var STANDARD_SPF = TXT('@', 'v=spf1 include:_spf.google.com a:bustimes.org.uk a:astromega.joshuagoodw.in include:spf.messagingengine.com -all');
+
 // Domains:
 
 D('bustimes.org.uk', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     A('@', JONCKHEERE),
     AAAA('@', JONCKHEERE_6),
     CNAME('www', 'bustimes.org.uk.'),
-    MX('@', 10, 'astromega.joshuagoodw.in.'),
-    TXT('@', 'v=spf1 include:_spf.google.com a:bustimes.org.uk a:astromega.joshuagoodw.in -all')
+    STANDARD_SPF,
+    MX('@', 10, 'in1-smtp.messagingengine.com.'),
+    MX('@', 20, 'in2-smtp.messagingengine.com.'),
+    CNAME('fm1._domainkey', 'fm1.bustimes.org.uk.dkim.fmhosted.com.'),
+    CNAME('fm2._domainkey', 'fm2.bustimes.org.uk.dkim.fmhosted.com.'),
+    CNAME('fm3._domainkey', 'fm3.bustimes.org.uk.dkim.fmhosted.com.')
 );
 
 D('bustim.es', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
@@ -26,7 +32,9 @@ D('bustim.es', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     AAAA('@', JONCKHEERE_6),
     CNAME('www', 'bustimes.org.uk.'),
     CNAME('api', 'd2mjppkdxq1joc.cloudfront.net.'),
-    MX('@', 1, 'astromega.joshuagoodw.in.')
+    STANDARD_SPF,
+    MX('@', 10, 'in1-smtp.messagingengine.com.'),
+    MX('@', 20, 'in2-smtp.messagingengine.com.')
 );
 
 /*
@@ -40,8 +48,8 @@ D('bustimes.io', REG_NONE, DnsProvider(DNS_GANDI),
 
 D('joshuagoodw.in', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     A('@', ASTROMEGA),
-    A('astromega', ASTROMEGA),
     AAAA('@', ASTROMEGA_6),
+    A('astromega', ASTROMEGA),
     AAAA('astromega', ASTROMEGA_6),
     A('beaver', BEAVER),
     AAAA('beaver', BEAVER_6),
@@ -52,22 +60,31 @@ D('joshuagoodw.in', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     CNAME('*', 'joshuagoodw.in.'),
     CNAME('subtitles', 'bustimes.org.uk.'),
     CNAME('tools', 'jclgoodwin.gitlab.io.'),
+    TXT('@', 'google-site-verification=swE7yOczprWYM5AVzFarzB_Xiy128k5gn3_S9C2Uxls'),
+    STANDARD_SPF,
     MX('@', 10, 'in1-smtp.messagingengine.com.'),
     MX('@', 20, 'in2-smtp.messagingengine.com.'),
-    TXT('@', 'v=spf1 include:_spf.google.com a:solo.bustimes.org.uk a:astromega.joshuagoodw.in -all'),
-    TXT('@', 'google-site-verification=swE7yOczprWYM5AVzFarzB_Xiy128k5gn3_S9C2Uxls')
+    CNAME('fm1._domainkey', 'fm1.joshuagoodw.in.dkim.fmhosted.com.'),
+    CNAME('fm2._domainkey', 'fm2.joshuagoodw.in.dkim.fmhosted.com.'),
+    CNAME('fm3._domainkey', 'fm3.joshuagoodw.in.dkim.fmhosted.com.')
 );
 
 D('joshuagoodwin.com', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     A('@', ASTROMEGA),
+    AAAA('@', ASTROMEGA_6),
     CNAME('*', 'joshuagoodw.in.'),
     CNAME('www', 'joshuagoodw.in.'),
-    MX('@', 10, 'spool.mail.gandi.net.'),
-    MX('@', 50, 'fb.mail.gandi.net.')
+    STANDARD_SPF,
+    MX('@', 10, 'in1-smtp.messagingengine.com.'),
+    MX('@', 20, 'in2-smtp.messagingengine.com.')
 );
 
 D('supermarketmarket.co.uk', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     A('@', JONCKHEERE),
+    AAAA('@', JONCKHEERE_6),
     CNAME('www', 'supermarketmarket.co.uk.'),
-    TXT('@', 'google-site-verification=Lo7vOAWM5ruYz4la5EtBOyljWncFU1_jgs4dodt3P98')
+    TXT('@', 'google-site-verification=Lo7vOAWM5ruYz4la5EtBOyljWncFU1_jgs4dodt3P98'),
+    STANDARD_SPF,
+    MX('@', 10, 'in1-smtp.messagingengine.com.'),
+    MX('@', 20, 'in2-smtp.messagingengine.com.')
 );
