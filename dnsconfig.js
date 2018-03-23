@@ -2,7 +2,7 @@
 
 var REG_NONE = NewRegistrar('none', 'NONE');
 var DNS_CLOUDFLARE = NewDnsProvider('cloudflare', 'CLOUDFLAREAPI');
-// var DNS_GANDI = NewDnsProvider('gandi', 'GANDI');
+var DNS_GANDI = NewDnsProvider('gandi', 'GANDI');
 
 var BEAVER = '176.58.111.55';
 var BEAVER_6 = '2a01:7e00::f03c:91ff:fe60:96bb';
@@ -37,14 +37,25 @@ D('bustim.es', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     MX('@', 20, 'in2-smtp.messagingengine.com.')
 );
 
-/*
-D('bustimes.io', REG_NONE, DnsProvider(DNS_GANDI),
+D('bustimes.org', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     A('@', JONCKHEERE),
     AAAA('@', JONCKHEERE_6),
     CNAME('www', 'bustimes.org.uk.'),
-    TXT('@', 'google-site-verification=uLP7Vt-vsgfEUmauz7KLEoTyZVwjMCytWxIRvA73oKQ')
+    TXT('@', 'google-site-verification=Qn-hbgT7WIIN7YznRuYwwkn8rvWasjYL-mctHxLVDVo'),
+    STANDARD_SPF,
+    MX('@', 10, 'in1-smtp.messagingengine.com.'),
+    MX('@', 20, 'in2-smtp.messagingengine.com.')
 );
-*/
+
+D('bustimes.io', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
+    A('@', JONCKHEERE),
+    AAAA('@', JONCKHEERE_6),
+    CNAME('www', 'bustimes.org.uk.'),
+    TXT('@', 'google-site-verification=uLP7Vt-vsgfEUmauz7KLEoTyZVwjMCytWxIRvA73oKQ'),
+    STANDARD_SPF,
+    MX('@', 10, 'in1-smtp.messagingengine.com.'),
+    MX('@', 20, 'in2-smtp.messagingengine.com.')
+);
 
 D('joshuagoodw.in', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     A('@', ASTROMEGA),
@@ -61,6 +72,7 @@ D('joshuagoodw.in', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     CNAME('subtitles', 'bustimes.org.uk.'),
     CNAME('tools', 'jclgoodwin.gitlab.io.'),
     TXT('@', 'google-site-verification=swE7yOczprWYM5AVzFarzB_Xiy128k5gn3_S9C2Uxls'),
+    TXT('_gitlab-pages-verification-code.tools', 'gitlab-pages-verification-code=2964b4ad0cb60fb0f5be01e4d3b393b3'),
     STANDARD_SPF,
     MX('@', 10, 'in1-smtp.messagingengine.com.'),
     MX('@', 20, 'in2-smtp.messagingengine.com.'),
