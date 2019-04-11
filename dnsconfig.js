@@ -11,13 +11,17 @@ var ASTROMEGA_6 = '2a07:4580:b0d:e6::578b';
 var JONCKHEERE = '94.130.23.252';
 var JONCKHEERE_6 = '2a01:4f8:10b:1d03::2';
 
-var STANDARD_SPF = TXT('@', 'v=spf1 include:_spf.google.com a:bustimes.org.uk a:astromega.joshuagoodw.in include:spf.messagingengine.com -all');
+var floating = '68.183.252.225';
+var rapta = '209.97.129.56';
+var rapta_6 = '2a03:b0c0:1:e0::3e1:3001';
+
+var STANDARD_SPF = TXT('@', 'v=spf1 include:_spf.google.com ip4:209.97.129.56 a:astromega.joshuagoodw.in a:jonckheere.joshuagoodw.in include:spf.messagingengine.com -all');
 
 // Domains:
 
 D('bustimes.org.uk', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
-    A('@', JONCKHEERE),
-    AAAA('@', JONCKHEERE_6),
+    A('@', floating),
+    AAAA('@', rapta_6),
     CNAME('www', 'bustimes.org.uk.'),
     STANDARD_SPF,
     MX('@', 10, 'in1-smtp.messagingengine.com.'),
@@ -28,9 +32,9 @@ D('bustimes.org.uk', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
 );
 
 D('bustim.es', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
-    A('@', JONCKHEERE),
-    AAAA('@', JONCKHEERE_6),
-    CNAME('www', 'bustimes.org.uk.'),
+    A('@', floating),
+    AAAA('@', rapta_6),
+    CNAME('www', 'bustim.es.'),
     CNAME('api', 'd2mjppkdxq1joc.cloudfront.net.'),
     STANDARD_SPF,
     MX('@', 10, 'in1-smtp.messagingengine.com.'),
@@ -38,19 +42,27 @@ D('bustim.es', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
 );
 
 D('bustimes.org', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
-    A('@', JONCKHEERE),
-    AAAA('@', JONCKHEERE_6),
-    CNAME('www', 'bustimes.org.uk.'),
+    A('@', floating),
+    AAAA('@', rapta_6),
+    A('rapta', rapta),
+    AAAA('rapta', rapta_6),
+    A('solo', '142.93.37.175'),
+    CNAME('www', 'bustimes.org.'),
+    A('fathom', '178.62.36.10'),
+    AAAA('fathom', '2a03:b0c0:1:d0::37f:1'),
     TXT('@', 'google-site-verification=Qn-hbgT7WIIN7YznRuYwwkn8rvWasjYL-mctHxLVDVo'),
     STANDARD_SPF,
     MX('@', 10, 'in1-smtp.messagingengine.com.'),
-    MX('@', 20, 'in2-smtp.messagingengine.com.')
+    MX('@', 20, 'in2-smtp.messagingengine.com.'),
+    A('test', '68.183.252.225'),
+    A('maps', JONCKHEERE),
+    AAAA('maps', JONCKHEERE_6)
 );
 
 D('bustimes.io', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
-    A('@', JONCKHEERE),
-    AAAA('@', JONCKHEERE_6),
-    CNAME('www', 'bustimes.org.uk.'),
+    A('@', floating),
+    AAAA('@', rapta_6),
+    CNAME('www', 'bustimes.io.'),
     TXT('@', 'google-site-verification=uLP7Vt-vsgfEUmauz7KLEoTyZVwjMCytWxIRvA73oKQ'),
     STANDARD_SPF,
     MX('@', 10, 'in1-smtp.messagingengine.com.'),
