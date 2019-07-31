@@ -51,8 +51,8 @@ D('bustimes.org', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     STANDARD_SPF,
     MX('@', 10, 'in1-smtp.messagingengine.com.'),
     MX('@', 20, 'in2-smtp.messagingengine.com.'),
-    A('maps', JONCKHEERE),
-    AAAA('maps', JONCKHEERE_6)
+    A('maps', JONCKHEERE, {cloudflare_proxy: 'on'}),
+    AAAA('maps', JONCKHEERE_6, {cloudflare_proxy: 'on'})
 );
 
 D('bustimes.io', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
