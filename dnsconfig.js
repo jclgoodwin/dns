@@ -4,8 +4,6 @@ var REG_NONE = NewRegistrar('none', 'NONE');
 var DNS_CLOUDFLARE = NewDnsProvider('cloudflare', 'CLOUDFLAREAPI');
 var DNS_GANDI = NewDnsProvider('gandi', 'GANDI');
 
-var BEAVER = '176.58.111.55';
-var BEAVER_6 = '2a01:7e00::f03c:91ff:fe60:96bb';
 var ASTROMEGA = '185.157.233.18';
 var ASTROMEGA_6 = '2a07:4580:b0d:e6::578b';
 var JONCKHEERE = '94.130.23.252';
@@ -48,13 +46,11 @@ D('bustimes.org', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     AAAA('rapta', rapta_6),
     A('solo', '142.93.37.175'),
     CNAME('www', 'bustimes.org.'),
-    A('fathom', '178.62.36.10'),
-    AAAA('fathom', '2a03:b0c0:1:d0::37f:1'),
+    A('berkhof', '167.71.104.162'),
     TXT('@', 'google-site-verification=Qn-hbgT7WIIN7YznRuYwwkn8rvWasjYL-mctHxLVDVo'),
     STANDARD_SPF,
     MX('@', 10, 'in1-smtp.messagingengine.com.'),
     MX('@', 20, 'in2-smtp.messagingengine.com.'),
-    A('test', '68.183.252.225'),
     A('maps', JONCKHEERE),
     AAAA('maps', JONCKHEERE_6)
 );
@@ -74,14 +70,9 @@ D('joshuagoodw.in', REG_NONE, DnsProvider(DNS_CLOUDFLARE),
     AAAA('@', ASTROMEGA_6),
     A('astromega', ASTROMEGA),
     AAAA('astromega', ASTROMEGA_6),
-    A('beaver', BEAVER),
-    AAAA('beaver', BEAVER_6),
-    A('munin', JONCKHEERE),
-    AAAA('munin', JONCKHEERE_6),
     A('jonckheere', JONCKHEERE),
     AAAA('jonckheere', JONCKHEERE_6),
     CNAME('*', 'joshuagoodw.in.'),
-    CNAME('subtitles', 'bustimes.org.uk.'),
     CNAME('tools', 'jclgoodwin.gitlab.io.'),
     TXT('@', 'google-site-verification=swE7yOczprWYM5AVzFarzB_Xiy128k5gn3_S9C2Uxls'),
     TXT('_gitlab-pages-verification-code.tools', 'gitlab-pages-verification-code=2964b4ad0cb60fb0f5be01e4d3b393b3'),
