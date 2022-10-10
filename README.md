@@ -1,3 +1,2 @@
-This is my DNS configuration for various domain names, using [DNSControl](https://stackexchange.github.io/dnscontrol/) which is rather great.
-
-Eventually I want to use multiple providers because why not. 
+I use [DNSControl](https://stackexchange.github.io/dnscontrol/) to manage my DNS records,
+and this is my configuration for that.
