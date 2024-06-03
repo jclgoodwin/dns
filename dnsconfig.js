@@ -1,7 +1,7 @@
 // Providers:
 
 var REG_NONE = NewRegistrar("none");
-var DSP_CLOUDFLARE = NewDnsProvider("cloudflare");
+var DSP_CLOUDFLARE = NewDnsProvider("cloudflare", {"manage_redirects": true});
 // var DNS_GANDI = NewDnsProvider('gandi', 'GANDI');
 // var DNS_DIGITALOCEAN = NewDnsProvider('digitalocean');
 
@@ -13,7 +13,7 @@ var floating = '68.183.252.225';
 var goldfinger = '178.62.68.188';
 var goldfinger_6 = '2a03:b0c0:1:d0::fac:6001';
 
-var STANDARD_SPF = TXT('@', 'v=spf1 include:_spf.google.com include:spf.messagingengine.com -all');
+var STANDARD_SPF = TXT('@', 'v=spf1 include:spf.messagingengine.com -all');
 
 // Domains:
 
@@ -23,13 +23,14 @@ D("bustimes.org", REG_NONE,
     A("goldfinger", goldfinger),
     AAAA("goldfinger", goldfinger_6),
 
+    // Fastmail:
     MX("@", 10, "in1-smtp.messagingengine.com."),
     MX("@", 20, "in2-smtp.messagingengine.com."),
-
     CNAME("fm1._domainkey", "fm1.bustimes.org.dkim.fmhosted.com."),
     CNAME("fm2._domainkey", "fm2.bustimes.org.dkim.fmhosted.com."),
     CNAME("fm3._domainkey", "fm3.bustimes.org.dkim.fmhosted.com."),
 
+    // Amazon SES:
     CNAME("isu7e5pzeqdnygam6qrgexqltkgk3zim._domainkey", "isu7e5pzeqdnygam6qrgexqltkgk3zim.dkim.amazonses.com."),
     CNAME("l2c6onta4s3e7kc4zpu7nxcxaf7cf2t4._domainkey", "l2c6onta4s3e7kc4zpu7nxcxaf7cf2t4.dkim.amazonses.com."),
     CNAME("w7c6u4f7lnkpvxsynviqhxbbrw5xh7ur._domainkey", "w7c6u4f7lnkpvxsynviqhxbbrw5xh7ur.dkim.amazonses.com."),
@@ -60,7 +61,21 @@ D("bustimes.org.uk", REG_NONE,
     CNAME("www", "bustimes.org.uk.", CF_PROXY_ON),
     MX("@", 10, "in1-smtp.messagingengine.com."),
     MX("@", 20, "in2-smtp.messagingengine.com."),
-    TXT("@", "v=spf1 include:spf.messagingengine.com -all"),
+    STANDARD_SPF,
+
+    CF_REDIRECT("bustimes.org.uk/*", "https://bustimes.org/$1"),
+END);
+
+D("bustim.es", REG_NONE,
+    DnsProvider(DSP_CLOUDFLARE),
+    DefaultTTL(1),
+    ALIAS("@", "bustimes.org.", CF_PROXY_ON),
+    CNAME("www", "bustim.es.", CF_PROXY_ON),
+    MX("@", 10, "in1-smtp.messagingengine.com."),
+    MX("@", 20, "in2-smtp.messagingengine.com."),
+    STANDARD_SPF,
+
+    CF_TEMP_REDIRECT("bustim.es/*", "https://bustimes.org/$1"),
 END);
 
 D("jclg.uk", REG_NONE,
@@ -91,7 +106,21 @@ D("davidlynchcoffee.co.uk", REG_NONE,
     CNAME("www", "davidlynchcoffee.pages.dev.", CF_PROXY_ON),
     MX("@", 20, "in2-smtp.messagingengine.com."),
     MX("@", 10, "in1-smtp.messagingengine.com."),
-    TXT("@", "v=spf1 include:spf.messagingengine.com ?all"),
+    STANDARD_SPF,
+END);
+
+D("fuelmap.uk", REG_NONE,
+    DnsProvider(DSP_CLOUDFLARE),
+    DefaultTTL(1),
+    ALIAS("@", "fuelmap.pages.dev.", CF_PROXY_ON),
+    CNAME("www", "fuelmap.pages.dev.", CF_PROXY_ON),
+END);
+
+D("roadworks.me.uk", REG_NONE,
+    DnsProvider(DSP_CLOUDFLARE),
+    DefaultTTL(1),
+    A("@", "161.35.174.180", CF_PROXY_ON),
+    CNAME("www", "roadworks.me.uk.", CF_PROXY_ON),
 END);
 
 D('joshuagoodwin.com', REG_NONE,
@@ -100,8 +129,10 @@ D('joshuagoodwin.com', REG_NONE,
     CNAME('*', 'joshuagoodw.in.', CF_PROXY_ON),
     STANDARD_SPF,
     MX('@', 10, 'in1-smtp.messagingengine.com.'),
-    MX('@', 20, 'in2-smtp.messagingengine.com.')
-);
+    MX('@', 20, 'in2-smtp.messagingengine.com.'),
+
+    CF_REDIRECT("joshuagoodwin.com/*", "https://joshuagoodw.in/$1"),
+END);
 
 D("joshuagoodw.in", REG_NONE,
     DnsProvider(DSP_CLOUDFLARE),
